@@ -1,0 +1,97 @@
+:root {
+    --work-base-primary-color: rgb(49, 82, 0);
+    --work-base-accent-color: rgb(85, 141, 0);
+    --pause-base-accent-color: crimson;
+    --pause-base-primary-color: rgb(220, 20, 60, 0.3);
+    --stop-base-primary-color: rgb(173, 173, 173, 0.3);
+    --stop-base-accent-color: rgba(226, 226, 226, 0.726);
+
+    --current-primary-color: var(--work-base-primary-color);
+    --current-accent-color: var(--work-base-accent-color);
+
+    accent-color: var(--current-accent-color);
+}
+body {
+    text-align: center;
+    font-family: Arial;
+    font-size: 40px;
+    font-weight: bold;
+    display: grid;
+    grid-template-rows: 1fr 150px;
+    align-items: center;
+    height: 100vh;
+    background-color: #222;
+    color: var(--current-accent-color);
+
+    & .output {
+        border: solid 1px;
+        border-radius: 20px;
+        display: inline-block;
+        padding: 60px 20px 50px 20px;
+        width: 800px;
+        overflow: hidden;
+        border-color: var(--current-primary-color);
+
+        & .haultToggle {
+            margin-top: 40px;
+        }
+
+        & .haultToggle:hover {
+            filter: drop-shadow(0 0 0.75rem white);
+        }
+    }
+
+    & input[type="range"] {
+        appearance: none;
+        background: transparent;
+        cursor: pointer;
+        width: 300px;
+
+        &::-webkit-slider-runnable-track {
+            background-color: var(--current-primary-color);
+            height: 0.5rem;
+        }
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Override default look */
+            appearance: none;
+            margin-top: -12px; /* Centers thumb on the track */
+            background-color: var(--current-accent-color);
+            height: 2rem;
+            width: 1rem;
+        }
+
+        &:focus {
+            outline: none;
+
+            &::-webkit-slider-thumb {
+                border: 1px solid var(--current-primary-color);
+                outline: 3px solid var(--current-accent-color);
+                outline-offset: 0.125rem;
+            }
+        }
+    }
+}
+
+body:has(.pause) {
+    --current-primary-color: var(--pause-base-primary-color);
+    --current-accent-color: var(--pause-base-accent-color);
+}
+
+body:has(.work) {
+    --current-primary-color: var(--work-base-primary-color);
+    --current-accent-color: var(--work-base-accent-color);
+}
+
+body:has(.halt) {
+    --current-primary-color: var(--stop-base-primary-color);
+    --current-accent-color: var(--stop-base-accent-color);
+}
+
+[popover] {
+    filter: drop-shadow(0 0 0.3rem var(--current-primary-color));
+    border: none;
+    background-color: transparent;
+    font-size: 5rem;
+    color: var(--current-accent-color);
+}

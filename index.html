@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Pomodoro</title>
+        <link href="./css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="container">
+            <div id="output" class="output"></div>
+        </div>
+        <div class="toolbar">
+            <div id="workLengthPopover" popover>Popover content</div>
+            <input id="workLength" type="range" min="5" max="60" value="25" />
+
+            <div id="pauseLengthPopover" popover>Popover content</div>
+            <input id="pauseLength" type="range" min="1" max="10" value="5" />
+
+            <div id="extendedPauseLengthPopover" popover>Popover content</div>
+            <input
+                id="extendedPauseLength"
+                type="range"
+                min="10"
+                max="45"
+                value="15"
+            />
+        </div>
+        <script src="./script/pomodoro.js" type="module"></script>
+    </body>
+</html>
