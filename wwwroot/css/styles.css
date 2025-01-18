@@ -17,7 +17,7 @@ body {
     font-size: 40px;
     font-weight: bold;
     display: grid;
-    grid-template-rows: 1fr 150px;
+    grid-template-rows: 150px 1fr 150px;
     align-items: center;
     height: 100vh;
     background-color: #222;
