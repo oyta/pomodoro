@@ -7,6 +7,12 @@ Localhost dev with `python3 -m http.server`
 - [ ]  Add long break
 - [ ]  Add history of pomodoros to localStorage/indexedDb
 - [ ]  Add audio signal file
+- [ ]  Better GUI design
+- [ ]  Serverside control?
+- [ ]  Push API
+- [ ]  Notifications API
+- [ ]  Badging API
+- [ ]  Service Worker
 
 ## Colors
 - Primary color: #fb3818
