@@ -1,10 +1,6 @@
-import {
-  PersistentStorageBase,
-  LocalStorageHandler,
-} from "./persistentStorage.js";
+import { LocalStorageConstants } from "./localStorageKeys.js";
+import { LocalStorageHandler } from "./persistentStorage.js";
 export class Program {
-  static keyNotificationSubscriptionStatus =
-    "keyNotificationSubscriptionStatus";
   async run() {
     this.configureServiceWorker();
     this.configureEventListeners();
@@ -20,12 +16,16 @@ export class Program {
           body: "Notification from Pomo is set up.",
         });
         this.storage.set(
-          LocalStorageHandler.getKey("keyNotificationSubscriptionStatus"),
+          LocalStorageHandler.getKey(
+            LocalStorageConstants.keyNotificationSubscriptionStatus,
+          ),
           "granted",
         );
       } else if (result === "denied") {
         this.storage.set(
-          LocalStorageHandler.getKey("keyNotificationSubscriptionStatus"),
+          LocalStorageHandler.getKey(
+            LocalStorageConstants.keyNotificationSubscriptionStatus,
+          ),
           "denied",
         );
       }
