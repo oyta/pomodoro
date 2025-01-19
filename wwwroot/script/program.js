@@ -1,10 +1,12 @@
 import { LocalStorageConstants } from "./localStorageKeys.js";
 import { LocalStorageHandler } from "./persistentStorage.js";
+import { Pomodoro } from "./pomodoro.js";
 export class Program {
   async run() {
     this.configureServiceWorker();
     this.configureEventListeners();
     this.storage = new LocalStorageHandler();
+    new Pomodoro().run();
   }
 
   configureEventListeners() {
