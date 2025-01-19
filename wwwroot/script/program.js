@@ -43,3 +43,5 @@ export class Program {
     );
   }
 }
+
+new Program().run();
