@@ -1,17 +1,22 @@
 #!/bin/zsh
-# frontend build script
-# add version-parameter to .js-files
-# first, iterate all files
-# second, if it is a js- or html-file,
-echo "Adding versioning string to frontend static files to avoid cache issues"
-for file in ./wwwroot/**/*(.);
-    if [[ $file == *.js || $file == *.html ]]; then
-        echo -n "$file ";
-        # get checksum of file
+declare -A jsfileshash
+declare -A jsfilesname
+for file in ./wwwroot/**/*(.); do
+    if [[ $file == *.js ]]; then
         hash=$(shasum -a 256 $file | awk '{print $1}')
-        # utilizing the 16 msb digits
         shorthash=${hash:0:16}
-        echo " $shorthash"
-        # adding the short hash as versioning string to all .js files to avoid potential caching were not wanteds
-        sed -Er -i.bu "s/([a-z]|[A-Z]|\d|^\s+)(\.js){1}(\?version=)?([a-z]|[A-Z]|[0-9])*/\1\2\?version=$shorthash/g" $file
+        jsfileshash[$file]="$shorthash"
+        jsfilesname[$file]=$(basename -- "$file")
     fi
+done
+for file in ./wwwroot/**/*(.); do
+    if [[ $file == *.js || $file == *.html ]]; then
+        # sed -Er -i.bu "s/([a-z]|[A-Z]|\d|^\s+)(\.js){1}(\?version=)?([a-z]|[A-Z]|[0-9])*/\1\2\?version=$shorthash/g" $file
+        for key value in ${(kv)jsfilesname}; do
+            ashorthash=${jsfileshash[$key]}
+            sed -Er -i.bu "s/($value){1}(\?version=)?([a-z]|[A-Z]|[0-9])*/\1\?version=$ashorthash/g" $file
+        done
+    fi
+done
+
+#sed -Er -i.bu "s/([a-z]|[A-Z]|\d|^\s+)(\.js){1}(\?version=)?([a-z]|[A-Z]|[0-9])*/\1\2\?version=$shorthash/g" $file
