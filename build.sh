@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 original_wd=$PWD
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 cd "$parent_path"
@@ -8,7 +8,7 @@ echo "Script dir: $parent_path"
 
 declare -A jsfileshash
 declare -A jsfilesname
-for file in ./wwwroot/**/*(.); do
+for file in ./wwwroot/**/*; do
     if [[ $file == *.js ]]; then
         hash=$(shasum -a 256 $file | awk '{print $1}')
         shorthash=${hash:0:16}
