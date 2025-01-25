@@ -1,4 +1,11 @@
 #!/bin/zsh
+original_wd=$PWD
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+cd "$parent_path"
+
+echo "Original working dir: $original_wd"
+echo "Script dir: $parent_path"
+
 declare -A jsfileshash
 declare -A jsfilesname
 for file in ./wwwroot/**/*(.); do
@@ -20,3 +27,5 @@ for file in ./wwwroot/**/*(.); do
 done
 # test med bash 4 på serveren . hugs og endra shebang og køyr med "bash build.sh"
 #sed -Er -i.bu "s/([a-z]|[A-Z]|\d|^\s+)(\.js){1}(\?version=)?([a-z]|[A-Z]|[0-9])*/\1\2\?version=$shorthash/g" $file
+
+cd "$original_wd"
