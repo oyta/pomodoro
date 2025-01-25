@@ -18,5 +18,5 @@ for file in ./wwwroot/**/*(.); do
         done
     fi
 done
-
+# test med bash 4 på serveren . hugs og endra shebang og køyr med "bash build.sh"
 #sed -Er -i.bu "s/([a-z]|[A-Z]|\d|^\s+)(\.js){1}(\?version=)?([a-z]|[A-Z]|[0-9])*/\1\2\?version=$shorthash/g" $file
