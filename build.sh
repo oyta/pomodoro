@@ -16,7 +16,7 @@ for file in ./wwwroot/**/*; do
         jsfilesname[$file]=$(basename -- "$file")
     fi
 done
-for file in ./wwwroot/**/*(.); do
+for file in ./wwwroot/**/*; do
     if [[ $file == *.js || $file == *.html ]]; then
         # sed -Er -i.bu "s/([a-z]|[A-Z]|\d|^\s+)(\.js){1}(\?version=)?([a-z]|[A-Z]|[0-9])*/\1\2\?version=$shorthash/g" $file
         for key value in ${(kv)jsfilesname}; do
