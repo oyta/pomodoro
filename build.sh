@@ -10,7 +10,7 @@ declare -A jsfileshash
 declare -A jsfilesname
 for file in ./wwwroot/**/*; do
     if [[ $file == *.js ]]; then
-        hash=$(shasum -a 256 $file | awk '{print $1}')
+        hash=$(sha256sum $file | awk '{print $1}')
         shorthash=${hash:0:16}
         jsfileshash[$file]="$shorthash"
         jsfilesname[$file]=$(basename -- "$file")
