@@ -21,7 +21,7 @@ for file in ./wwwroot/**/*; do
         # sed -Er -i.bu "s/([a-z]|[A-Z]|\d|^\s+)(\.js){1}(\?version=)?([a-z]|[A-Z]|[0-9])*/\1\2\?version=$shorthash/g" $file
         for key in ${!jsfilesname[@]}; do
             ashorthash=${jsfileshash[$key]}
-            sed -Er -i.bu "s/(${jsfilesname[$key]}){1}(\?version=)?([a-z]|[A-Z]|[0-9])*/\1\?version=$ashorthash/g" $file
+            sed -r -i.bu "s/(${jsfilesname[$key]}){1}(\?version=)?([a-z]|[A-Z]|[0-9])*/\1\?version=$ashorthash/g" $file
         done
     fi
 done
