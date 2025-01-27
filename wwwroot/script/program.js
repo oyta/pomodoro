@@ -10,6 +10,9 @@ export class Program {
   }
 
   configureEventListeners() {
+    const settingsPanel = document.querySelector(".toolbar");
+    settingsPanel.addEventListener("click", this.toggleSettingsMenu);
+
     const button = document.getElementById("toggleNotificationsButton");
     button.addEventListener("click", async () => {
       const result = await window.Notification.requestPermission();
@@ -41,6 +44,10 @@ export class Program {
         scope: "./",
       },
     );
+  }
+
+  toggleSettingsMenu(event) {
+    event.target.classList.toggle("show");
   }
 }
 

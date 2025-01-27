@@ -1,49 +1,120 @@
 :root {
-    --work-base-primary-color: rgb(49, 82, 0);
-    --work-base-accent-color: rgb(85, 141, 0);
-    --pause-base-accent-color: crimson;
-    --pause-base-primary-color: rgb(220, 20, 60, 0.3);
-    --stop-base-primary-color: rgb(173, 173, 173, 0.3);
-    --stop-base-accent-color: rgba(226, 226, 226, 0.726);
-
+    color-scheme: light dark;
+    --work-base-primary-color: light-dark(rgb(200, 200, 190), rgb(49, 82, 0));
+    --work-base-accent-color: light-dark(rgb(10, 16, 0), rgb(85, 141, 0));
+    --pause-base-accent-color: light-dark(crimson, crimson);
+    --pause-base-primary-color: light-dark(
+        rgb(100, 10, 30),
+        rgb(220, 20, 60, 0.3)
+    );
+    --stop-base-primary-color: light-dark(
+        rgb(40, 40, 40),
+        rgb(173, 173, 173, 0.3)
+    );
+    --stop-base-accent-color: light-dark(
+        rgb(60, 60, 60),
+        rgba(226, 226, 226, 0.726)
+    );
+    --background-color: light-dark(blanchedalmond, #222);
     --current-primary-color: var(--work-base-primary-color);
     --current-accent-color: var(--work-base-accent-color);
-
     accent-color: var(--current-accent-color);
+}
+.raleway-100 {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+}
+.source-code-pro-200 {
+    font-family: "Source Code Pro", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
 }
 body {
     text-align: center;
     font-family: Arial;
-    font-size: 40px;
+    font-size: 60px;
     font-weight: bold;
     display: grid;
-    grid-template-rows: 150px 1fr 150px;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
     align-items: center;
     height: 100vh;
-    background-color: #222;
+    width: 100dvw;
+    background-color: var(--background-color);
     color: var(--current-accent-color);
+    margin: 0;
 
     & .output {
-        border: solid 1px;
-        border-radius: 20px;
         display: inline-block;
         padding: 60px 20px 50px 20px;
-        width: 800px;
         overflow: hidden;
         border-color: var(--current-primary-color);
 
         & .haultToggle {
             margin-top: 40px;
         }
+    }
+}
 
-        & .haultToggle:hover {
-            filter: drop-shadow(0 0 0.75rem white);
-        }
+body:has(.pause) {
+    --current-primary-color: var(--pause-base-primary-color);
+    --current-accent-color: var(--pause-base-accent-color);
+}
+
+body:has(.work) {
+    --current-primary-color: var(--work-base-primary-color);
+    --current-accent-color: var(--work-base-accent-color);
+}
+
+body:has(.halt) {
+    --current-primary-color: var(--stop-base-primary-color);
+    --current-accent-color: var(--stop-base-accent-color);
+}
+
+[popover] {
+    filter: drop-shadow(0 0 0.3rem var(--current-primary-color));
+    border: none;
+    background-color: transparent;
+    font-size: 2rem;
+    color: var(--current-accent-color);
+}
+
+:popover-open {
+    width: 100dvw;
+    height: 100px;
+    position: absolute;
+    inset: unset;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 30px;
+    padding-right: 50px;
+    text-align: right;
+}
+
+.toolbar {
+    position: absolute;
+    width: 67dvw;
+    height: 100dvh;
+    right: -67dvw;
+    border-left: solid 30px var(--current-accent-color);
+    background-color: var(--background-color);
+    transition-property: right, border-width;
+    transition-duration: 1.5s;
+    transition-delay: 0.3s;
+    overflow: scroll;
+
+    &.show {
+        right: 0;
+        border-width: 1px;
     }
 
     & input[type="range"] {
         appearance: none;
-        background: transparent;
         cursor: pointer;
         width: 300px;
 
@@ -71,27 +142,4 @@ body {
             }
         }
     }
-}
-
-body:has(.pause) {
-    --current-primary-color: var(--pause-base-primary-color);
-    --current-accent-color: var(--pause-base-accent-color);
-}
-
-body:has(.work) {
-    --current-primary-color: var(--work-base-primary-color);
-    --current-accent-color: var(--work-base-accent-color);
-}
-
-body:has(.halt) {
-    --current-primary-color: var(--stop-base-primary-color);
-    --current-accent-color: var(--stop-base-accent-color);
-}
-
-[popover] {
-    filter: drop-shadow(0 0 0.3rem var(--current-primary-color));
-    border: none;
-    background-color: transparent;
-    font-size: 5rem;
-    color: var(--current-accent-color);
 }

@@ -75,6 +75,7 @@ export class Timer {
     );
     let returnString =
       this.state === TimerState.PAUSE ? "Pause <br />" : "Fokus <br />";
+    returnString = "";
     returnString += "<small>";
     returnString += hours > 0 ? hours + " hours " : "";
     returnString += minutes > 0 ? minutes + " minutes " : "";
