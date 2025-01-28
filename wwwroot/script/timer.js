@@ -66,7 +66,7 @@ export class Timer {
     );
   }
 
-  timeSince(now, then) {
+  timeSince(now, then, shortFormat = true) {
     const diff = now - then;
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -74,13 +74,14 @@ export class Timer {
       ((diff % (1000 * 60 * 60)) % (1000 * 60)) / 1000,
     );
     let returnString =
-      this.state === TimerState.PAUSE ? "Pause <br />" : "Fokus <br />";
-    returnString = "";
-    returnString += "<small>";
+      this.state === TimerState.PAUSE
+        ? "<div class='title'>PAUSE</div><br/>"
+        : "<div class='title'>FOKUS</div><br/>";
     returnString += hours > 0 ? hours + " hours " : "";
     returnString += minutes > 0 ? minutes + " minutes " : "";
-    returnString += seconds + " seconds";
-    returnString += "</small>";
+    if (!shortFormat || minutes < 1) {
+      returnString += seconds + " seconds";
+    }
 
     return returnString;
   }

@@ -15,7 +15,9 @@
         rgb(60, 60, 60),
         rgba(226, 226, 226, 0.726)
     );
-    --background-color: light-dark(blanchedalmond, #222);
+
+    --background-primary-color: light-dark(blanchedalmond, #222222);
+    --background-second-color: light-dark(burlywood, #2f2f2f);
     --current-primary-color: var(--work-base-primary-color);
     --current-accent-color: var(--work-base-accent-color);
     accent-color: var(--current-accent-color);
@@ -43,9 +45,11 @@ body {
     align-items: center;
     height: 100vh;
     width: 100dvw;
-    background-color: var(--background-color);
+    background-color: var(--background-primary-color);
     color: var(--current-accent-color);
     margin: 0;
+    overflow: hidden;
+    max-width: 100dvw;
 
     & .output {
         display: inline-block;
@@ -98,18 +102,36 @@ body:has(.halt) {
 
 .toolbar {
     position: absolute;
-    width: 67dvw;
+    width: 0;
     height: 100dvh;
-    right: -67dvw;
+    right: 0;
     border-left: solid 30px var(--current-accent-color);
-    background-color: var(--background-color);
-    transition-property: right, border-width;
+    background-color: var(--background-second-color);
+    transition-property: width, border-width;
     transition-duration: 1.5s;
     transition-delay: 0.3s;
     overflow: scroll;
 
+    button {
+        all: unset;
+        border: solid 1px var(--current-primary-color);
+        font-size: 20px;
+        text-align: center;
+        color: var(--current-primary-color);
+        background-color: var(--background-primary-color);
+        padding: 10px;
+    }
+    button:active {
+        background-color: var(--current-accent-color);
+        border-width: 4px;
+    }
+    button:disabled {
+        background-color: gray;
+        border: solid 1px gray;
+    }
+
     &.show {
-        right: 0;
+        width: 95dvw;
         border-width: 1px;
     }
 
